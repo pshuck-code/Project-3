@@ -9,6 +9,7 @@ regex = re.compile('\[(\d{2})/([A-Za-z]{3,4})/(\d{4}):(\d{2}:\d{2}:\d{2}).+\] \"
 url = "https://s3.amazonaws.com/tcmg476/http_access_log"
 file = urllib.request.urlopen(url)
 print(str(file.getcode()))
+
 #variables for amount of access requests each day
 mon = 0
 tues = 0
@@ -33,28 +34,20 @@ date = "1995"
 
 
 
+for line in file:
+    decoded_line = line.decode("utf-8")
+    parts = regex.split(decoded_line)
+    
 
-#for loop that loops through each line of the request 
-#for lines in CoList:
- #   if lines:
-        #checks for past six months requests
-     #   if may in CoList[count]:
-    #        sixMonth +=1
-   #     if jun in CoList[count]:
-  #          sixMonth +=1
-      #  if jul in CoList[count]:
-     #       sixMonth +=1
-    #    if aug in CoList[count]:
-   #         sixMonth +=1
-  #      if sep in CoList[count]:
-        #    sixMonth +=1
-       # if octo in CoList[count]:
-      #      if date in CoList[count]:
-     #           sixMonth +=1
-    #adds total requests
-    #count +=1
+    
+    
 
-#outputs both requests
-#print("There were " + str(count) + " total requests") 
-#print("There were " + str(sixMonth) + " in the past six months")
+
+    
+
+
+
+
+
+
 
