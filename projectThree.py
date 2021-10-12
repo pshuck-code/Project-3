@@ -19,6 +19,10 @@ fri = 0
 sat = 0
 sun = 0
 
+threeX = 0
+fourX = 0
+total = 0
+
 #variables for figuring out requests in the past six months
 may = "May"
 jun = "Jun"
@@ -33,13 +37,23 @@ date = "1995"
 #CoList = Content.split('\n')
 
 
-
 for line in file:
-    decoded_line = line.decode("utf-8")
-    parts = regex.split(decoded_line)
-    
+    total+=1
+    try:
+        decoded_line = line.decode("utf-8")
+        parts = regex.split(decoded_line)
+        
+        if parts[7] == "300" or parts[7] == "301" or parts[7] == "302" or parts[7] == "303" or parts[7] == "304":
+            threeX+=1
+        if parts[7] == "400" or parts[7] == "401" or parts[7] == "402" or parts[7] == "403" or parts[7] == "404":
+            fourX+=1
+    except IndexError:
+        print("Index Error Reached")
 
-    
+
+print("redirects were " + str(round(threeX/total, 2)))
+print("unsuccessful were " + str(round(fourX/total,2)))
+#print(parts[9])
     
 
 
