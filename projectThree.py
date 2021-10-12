@@ -3,12 +3,8 @@ import urllib.request
 import calendar
 
 regex = re.compile('\[(\d{2})/([A-Za-z]{3,4})/(\d{4}):(\d{2}:\d{2}:\d{2}).+\] \"([A-Z]{3,6}) (.+) HTTP/1.0\" (\d{3}) .*')
-
 url = "https://s3.amazonaws.com/tcmg476/http_access_log"
 file = urllib.request.urlopen(url)
-print(str(file.getcode()))
-
-
 
 #variables for amount of access requests each day
 mon = 0
@@ -38,24 +34,15 @@ octo = 0
 nov = 0
 dec = 0
 
+#tracks month for calendar
 month = 0
-
-#reads file and splits it by line
-#Content = file.read()
-#CoList = Content.split('\n')
-
 
 for line in file:
     total+=1
     try:
         decoded_line = line.decode("utf-8")
         parts = regex.split(decoded_line)
-        
-        #print(parts[1])
-        #print(parts[2])
-        #print(parts[3])
-        #print(parts[4])
-
+        # finds amount of requests for month and changes month for calendar
         if parts[2] == "Aug":
             aug+=1
             month = 8
@@ -93,6 +80,7 @@ for line in file:
             jul+=1
             month = 7
 
+        #finds amount of requests each day
         if calendar.weekday(int(parts[3]),month,int(parts[1])) == 0:
             mon+=1
         if calendar.weekday(int(parts[3]),month,int(parts[1])) == 1:
